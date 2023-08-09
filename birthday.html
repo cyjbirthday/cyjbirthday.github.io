@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生日快乐</title>
+  <title>生日祝福</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,6 +13,7 @@
     }
     
     .birthday-message {
+      display: none;
       margin-top: 0;
     }
     
@@ -47,15 +48,18 @@
     // 获取当前日期和时间
     var currentDate = new Date();
     
-    // 如果不是生日当天，则自动跳转到 wait.html
-    if (currentDate.getMonth() !== birthdayMonth - 1 || currentDate.getDate() !== birthdayDay) {
+    // 如果是生日当天，则显示生日祝福文字
+    if (currentDate.getMonth() === birthdayMonth - 1 && currentDate.getDate() === birthdayDay) {
+      document.querySelector('.birthday-message').style.display = 'block';
+      
+      // 计算从出生到今天的天数
+      var birthDate = new Date("2009-08-18"); // 修改为朋友的出生日期，格式为 "yyyy-mm-dd"
+      var daysAlive = Math.floor((currentDate - birthDate) / (1000 * 60 * 60 * 24));
+      document.getElementById("daysAlive").textContent = daysAlive;
+    } else {
+      // 如果不是生日当天，则自动跳转到 index.html
       window.location.href = "index.html";
     }
-    
-    // 计算从出生到今天的天数
-    var birthDate = new Date("2009-08-18"); // 修改为朋友的出生日期，格式为 "yyyy-mm-dd"
-    var daysAlive = Math.floor((currentDate - birthDate) / (1000 * 60 * 60 * 24));
-    document.getElementById("daysAlive").textContent = daysAlive;
   </script>
 </body>
 </html>
